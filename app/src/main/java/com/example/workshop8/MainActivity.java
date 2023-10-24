@@ -9,14 +9,10 @@ import android.widget.ListView;
 
 public class MainActivity extends AppCompatActivity {
 
-    ListView lvCustomer;
-    Button btAdd,btnSave,btnDelete;
-    ArrayAdapter<Customer> adapter;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_customer);
+        setContentView(R.layout.activity_main);
 
     }
 }
