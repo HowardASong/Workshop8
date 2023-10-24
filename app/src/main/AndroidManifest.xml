@@ -13,7 +13,7 @@
         android:theme="@style/Theme.Workshop8"
         tools:targetApi="31">
         <activity
-            android:name=".CustomerDetails"
+            android:name=".CustomerDetailsActivity"
             android:exported="false" />
         <activity
             android:name=".CustomerActivity"

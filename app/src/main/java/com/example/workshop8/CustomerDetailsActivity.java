@@ -3,11 +3,12 @@ package com.example.workshop8;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class CustomerDetails extends AppCompatActivity {
-    Button btnSave, btnCancel;
+public class CustomerDetailsActivity extends AppCompatActivity {
+    Button btnSave, btnDelete;
     EditText etCustomerId, etCustFirstName, etCustLastName, etCustAddress, etCustCity, etCustProv, etCustPostal, etCustCountry, etCustHomePhone, etCustBusPhone, etCustEmail, etAgentId;
 
     @Override
@@ -16,7 +17,7 @@ public class CustomerDetails extends AppCompatActivity {
         setContentView(R.layout.activity_customer_details);
 
         btnSave = findViewById(R.id.btnSave);
-        btnCancel = findViewById(R.id.btnCancel);
+        btnDelete = findViewById(R.id.btnDelete);
 
         etCustomerId = findViewById(R.id.etCustomerId);
         etCustFirstName = findViewById(R.id.etCustFirstName);
@@ -32,6 +33,32 @@ public class CustomerDetails extends AppCompatActivity {
         etAgentId = findViewById(R.id.etAgentId);
 
 
+
+
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                etCustomerId.setText("");
+                etCustFirstName.setText("");
+                etCustLastName.setText("");
+                etCustAddress.setText("");
+                etCustCity.setText("");
+                etCustProv.setText("");
+                etCustPostal.setText("");
+                etCustCountry.setText("");
+                etCustHomePhone.setText("");
+                etCustBusPhone.setText("");
+                etCustEmail.setText("");
+                etAgentId.setText("");
+            }
+        });
 
     }
 
