@@ -13,6 +13,12 @@
         android:theme="@style/Theme.Workshop8"
         tools:targetApi="31">
         <activity
+            android:name=".CustomerDetails"
+            android:exported="false" />
+        <activity
+            android:name=".CustomerActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
