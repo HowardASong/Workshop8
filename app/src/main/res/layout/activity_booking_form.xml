@@ -13,135 +13,166 @@
         android:layout_marginTop="16dp"
         android:text="Create a booking"
         android:textSize="24sp"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="115dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView19"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="24dp"
         android:text="Customer: "
-        tools:layout_editor_absoluteX="58dp"
-        tools:layout_editor_absoluteY="73dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView17" />
 
     <Spinner
         android:id="@+id/spCustomers"
         android:layout_width="231dp"
         android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="145dp"
-        tools:layout_editor_absoluteY="68dp" />
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView17" />
 
     <TextView
         android:id="@+id/textView20"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="36dp"
         android:text="Traveler Count: "
-        tools:layout_editor_absoluteX="28dp"
-        tools:layout_editor_absoluteY="130dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView19" />
 
     <EditText
         android:id="@+id/etTravelerCount"
         android:layout_width="231dp"
         android:layout_height="35dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="32dp"
         android:ems="10"
         android:inputType="number"
-        tools:layout_editor_absoluteX="145dp"
-        tools:layout_editor_absoluteY="121dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spCustomers" />
 
     <TextView
         android:id="@+id/textView21"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="40dp"
         android:text="Package: "
-        tools:layout_editor_absoluteX="65dp"
-        tools:layout_editor_absoluteY="194dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView20" />
 
     <Spinner
         android:id="@+id/spPackages"
         android:layout_width="231dp"
         android:layout_height="24dp"
-        tools:layout_editor_absoluteX="145dp"
-        tools:layout_editor_absoluteY="189dp" />
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etTravelerCount" />
 
     <EditText
         android:id="@+id/etTripStart"
         android:layout_width="231dp"
         android:layout_height="35dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="32dp"
         android:ems="10"
         android:inputType="date"
-        tools:layout_editor_absoluteX="145dp"
-        tools:layout_editor_absoluteY="242dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spPackages" />
 
     <TextView
         android:id="@+id/textView22"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="32dp"
         android:text="Trip Start: "
-        tools:layout_editor_absoluteX="61dp"
-        tools:layout_editor_absoluteY="249dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView21" />
 
     <TextView
         android:id="@+id/textView23"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="68dp"
+        android:layout_marginTop="56dp"
         android:text="Trip End: "
-        tools:layout_editor_absoluteX="68dp"
-        tools:layout_editor_absoluteY="322dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView22" />
 
     <EditText
         android:id="@+id/etTripEnd"
         android:layout_width="231dp"
         android:layout_height="35dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="32dp"
         android:ems="10"
         android:inputType="date"
-        tools:layout_editor_absoluteX="145dp"
-        tools:layout_editor_absoluteY="314dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etTripStart" />
 
     <TextView
         android:id="@+id/textView24"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="44dp"
         android:text="Trip Type: "
-        tools:layout_editor_absoluteX="61dp"
-        tools:layout_editor_absoluteY="385dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView23" />
 
     <Spinner
         android:id="@+id/spTripTypes"
         android:layout_width="231dp"
         android:layout_height="24dp"
-        tools:layout_editor_absoluteX="145dp"
-        tools:layout_editor_absoluteY="380dp" />
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etTripEnd" />
 
     <TextView
         android:id="@+id/textView25"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="84dp"
+        android:layout_marginTop="32dp"
         android:text="Class: "
-        tools:layout_editor_absoluteX="84dp"
-        tools:layout_editor_absoluteY="442dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView24" />
 
     <Spinner
         android:id="@+id/spClass"
         android:layout_width="231dp"
         android:layout_height="24dp"
-        tools:layout_editor_absoluteX="145dp"
-        tools:layout_editor_absoluteY="437dp" />
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spTripTypes" />
 
     <Button
         android:id="@+id/btnSubmit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
+        android:layout_marginStart="68dp"
+        android:layout_marginBottom="172dp"
         android:text="Submit"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="511dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/btnClear"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="64dp"
+        android:layout_marginBottom="172dp"
         android:text="Clear"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:layout_editor_absoluteY="511dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
