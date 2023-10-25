@@ -6,4 +6,142 @@
     android:layout_height="match_parent"
     tools:context=".BookingFormActivity">
 
+    <TextView
+        android:id="@+id/textView17"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Create a booking"
+        android:textSize="24sp"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="115dp" />
+
+    <TextView
+        android:id="@+id/textView19"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Customer: "
+        tools:layout_editor_absoluteX="58dp"
+        tools:layout_editor_absoluteY="73dp" />
+
+    <Spinner
+        android:id="@+id/spCustomers"
+        android:layout_width="231dp"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteX="145dp"
+        tools:layout_editor_absoluteY="68dp" />
+
+    <TextView
+        android:id="@+id/textView20"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Traveler Count: "
+        tools:layout_editor_absoluteX="28dp"
+        tools:layout_editor_absoluteY="130dp" />
+
+    <EditText
+        android:id="@+id/etTravelerCount"
+        android:layout_width="231dp"
+        android:layout_height="35dp"
+        android:ems="10"
+        android:inputType="number"
+        tools:layout_editor_absoluteX="145dp"
+        tools:layout_editor_absoluteY="121dp" />
+
+    <TextView
+        android:id="@+id/textView21"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Package: "
+        tools:layout_editor_absoluteX="65dp"
+        tools:layout_editor_absoluteY="194dp" />
+
+    <Spinner
+        android:id="@+id/spPackages"
+        android:layout_width="231dp"
+        android:layout_height="24dp"
+        tools:layout_editor_absoluteX="145dp"
+        tools:layout_editor_absoluteY="189dp" />
+
+    <EditText
+        android:id="@+id/etTripStart"
+        android:layout_width="231dp"
+        android:layout_height="35dp"
+        android:ems="10"
+        android:inputType="date"
+        tools:layout_editor_absoluteX="145dp"
+        tools:layout_editor_absoluteY="242dp" />
+
+    <TextView
+        android:id="@+id/textView22"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Trip Start: "
+        tools:layout_editor_absoluteX="61dp"
+        tools:layout_editor_absoluteY="249dp" />
+
+    <TextView
+        android:id="@+id/textView23"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Trip End: "
+        tools:layout_editor_absoluteX="68dp"
+        tools:layout_editor_absoluteY="322dp" />
+
+    <EditText
+        android:id="@+id/etTripEnd"
+        android:layout_width="231dp"
+        android:layout_height="35dp"
+        android:ems="10"
+        android:inputType="date"
+        tools:layout_editor_absoluteX="145dp"
+        tools:layout_editor_absoluteY="314dp" />
+
+    <TextView
+        android:id="@+id/textView24"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Trip Type: "
+        tools:layout_editor_absoluteX="61dp"
+        tools:layout_editor_absoluteY="385dp" />
+
+    <Spinner
+        android:id="@+id/spTripTypes"
+        android:layout_width="231dp"
+        android:layout_height="24dp"
+        tools:layout_editor_absoluteX="145dp"
+        tools:layout_editor_absoluteY="380dp" />
+
+    <TextView
+        android:id="@+id/textView25"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Class: "
+        tools:layout_editor_absoluteX="84dp"
+        tools:layout_editor_absoluteY="442dp" />
+
+    <Spinner
+        android:id="@+id/spClass"
+        android:layout_width="231dp"
+        android:layout_height="24dp"
+        tools:layout_editor_absoluteX="145dp"
+        tools:layout_editor_absoluteY="437dp" />
+
+    <Button
+        android:id="@+id/btnSubmit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:text="Submit"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="511dp" />
+
+    <Button
+        android:id="@+id/btnClear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="64dp"
+        android:text="Clear"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:layout_editor_absoluteY="511dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
