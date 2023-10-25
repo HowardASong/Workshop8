@@ -42,7 +42,7 @@ public class CustomerActivity extends AppCompatActivity {
         });
     }
 
-    private class CustomerDisplay implements Runnable(){
+    /*private class CustomerDisplay implements Runnable(){
 
         @Override
         public void run() {
@@ -55,6 +55,6 @@ public class CustomerActivity extends AppCompatActivity {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-        }
-    }
+        }*/
+//    }
 }
