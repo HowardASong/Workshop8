@@ -90,10 +90,10 @@ public class BookingFormActivity extends AppCompatActivity {
                         } catch (JSONException e) {
                             throw new RuntimeException(e);
                         }
-                        ArrayAdapter<Customer> customerAdapter = new ArrayAdapter<Customer>(getApplicationContext(), android.R.layout.simple_spinner_item, customerList);
-                        customerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                        spCustomers.setAdapter(customerAdapter);
                     }
+                    ArrayAdapter<Customer> customerAdapter = new ArrayAdapter<Customer>(getApplicationContext(), android.R.layout.simple_spinner_item, customerList);
+                    customerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spCustomers.setAdapter(customerAdapter);
                 }
             }, new Response.ErrorListener() {
                 @Override
@@ -107,12 +107,12 @@ public class BookingFormActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        loadCustomers();
+        //loadCustomers();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        loadCustomers();
+        //loadCustomers();
     }
 }
