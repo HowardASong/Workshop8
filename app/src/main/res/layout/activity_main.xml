@@ -241,7 +241,8 @@
                 android:textSize="25dp"
                 android:textStyle="bold"
                 tools:layout_editor_absoluteX="16dp"
-                tools:layout_editor_absoluteY="171dp" />
+                tools:layout_editor_absoluteY="171dp"
+                android:visibility="visible"/>
 
             <EditText
                 android:id="@+id/editPersonName"

@@ -88,8 +88,8 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
-
-        // Find the Sign In button by its ID
+    }
+/*        // Find the Sign In button by its ID (TO BE IMPLENTED LATER)
         Button signInButton = findViewById(R.id.main_signup_btn);
 
         // Set an OnClickListener for the Sign In button
@@ -99,8 +99,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent registrationIntent = new Intent(MainActivity.this, RegisterActivity.class);
                 startActivity(registrationIntent);
             }
-        });
-    }
+        });*/
 
     // Handles the mail notification feature
     public void onMailIconClick(View view) {
