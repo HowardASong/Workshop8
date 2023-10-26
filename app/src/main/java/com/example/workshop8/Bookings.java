@@ -76,6 +76,7 @@ public class Bookings {
         TripTypeId = tripTypeId;
         PackageId = packageId;
     }
+    public Bookings() {}
 
     @Override
     public String toString() {
