@@ -12,7 +12,7 @@ public class ListViewCustomer implements Serializable {
         this.CustFirstName = custFirstName;
         this.CustLastName = custLastName;
     }
-
+    private static final long serialVersionUID = 1L;
     public int getCustomerId() {
         return CustomerId;
     }

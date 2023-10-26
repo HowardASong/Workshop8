@@ -6,7 +6,9 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -15,13 +17,22 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.concurrent.Executors;
 
 public class CustomerDetailsActivity extends AppCompatActivity {
     Button btnSave, btnDelete;
     EditText etCustomerId, etCustFirstName, etCustLastName, etCustAddress, etCustCity, etCustProv, etCustPostal, etCustCountry, etCustHomePhone, etCustBusPhone, etCustEmail, etAgentId;
-    RequestQueue requestQueue; // Declare a RequestQueue
+    RequestQueue requestQueue;
+    int customerId;
+    ListViewCustomer listViewCust;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,11 +55,56 @@ public class CustomerDetailsActivity extends AppCompatActivity {
         etCustEmail = findViewById(R.id.etCustEmail);
         etAgentId = findViewById(R.id.etAgentId);
 
-        requestQueue = Volley.newRequestQueue(this); // Initialize the RequestQueue
+        requestQueue = Volley.newRequestQueue(this);
 
+        Intent intent = getIntent();
+        listViewCust = (ListViewCustomer) intent.getSerializableExtra("listviewcustomer");
+
+        String url = "http://10.0.2.2:8080/Workshop7-1.0-SNAPSHOT/api/booking/getallcustomers" + customerId;
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                VolleyLog.wtf(response, "utf-8");
+                JSONObject cust = null;
+                try {
+                    cust = new JSONObject(response);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                final JSONObject finalCust = cust;
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            etCustomerId.setText(finalCust.getInt("customerId") + "");
+                            etCustFirstName.setText(finalCust.getString("custFirstName"));
+                            etCustLastName.setText(finalCust.getString("custLastName"));
+                            etCustAddress.setText(finalCust.getString("custAddress"));
+                            etCustCity.setText(finalCust.getString("custCity"));
+                            etCustProv.setText(finalCust.getString("custProv"));
+                            etCustPostal.setText(finalCust.getString("custPostal"));
+                            etCustCountry.setText(finalCust.getString("custCountry"));
+                            etCustHomePhone.setText(finalCust.getString("custHomePhone"));
+                            etCustBusPhone.setText(finalCust.getString("custBusPhone"));
+                            etCustEmail.setText(finalCust.getString("custEmail"));
+                            etAgentId.setText(finalCust.getInt("agentId") + "");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.wtf(error.getMessage(), "utf-8");
+            }
+        });
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                saveCustomer();
                 // Call a method to handle saving or updating customer data here
             }
         });
@@ -59,6 +115,9 @@ public class CustomerDetailsActivity extends AppCompatActivity {
                 deleteCustomer(); // Call the deleteCustomer method when the "Delete" button is clicked
             }
         });
+    }
+
+    private void saveCustomer() {
     }
 
     // Deleting a customer
