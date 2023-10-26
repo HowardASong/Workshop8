@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -169,6 +170,7 @@ public class BookingFormActivity extends AppCompatActivity {
                     Thread.sleep(2000);
                     for (int i=0; i<travelerCount; i++) {
                         getLastBooking(tripStart, tripEnd, selectedPackage, regionId, selectedClass);
+                        Toast.makeText(getApplicationContext(),"Booking created successfully!",Toast.LENGTH_SHORT).show();
                     }
                 } catch (JSONException | InterruptedException e) {
                     throw new RuntimeException(e);
@@ -226,6 +228,10 @@ public class BookingFormActivity extends AppCompatActivity {
             // Handle parsing errors here
             return inputDate; // Return the original input date as a fallback
         }
+    }
+
+    public void resetFields() {
+        spCustomers.setSelection(0);
     }
 
     // Handles loading in all customers onto drop down menu (spinner)
