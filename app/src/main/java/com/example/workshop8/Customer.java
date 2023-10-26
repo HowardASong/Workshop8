@@ -28,6 +28,7 @@ public class Customer {
         CustEmail = custEmail;
         AgentId = agentId;
     }
+    public Customer() {}
 
     public int getCustomerId() {
         return CustomerId;
