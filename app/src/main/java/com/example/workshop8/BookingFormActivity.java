@@ -118,6 +118,13 @@ public class BookingFormActivity extends AppCompatActivity {
             }
         });
 
+        btnClear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                resetFields();
+            }
+        });
+
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -171,6 +178,7 @@ public class BookingFormActivity extends AppCompatActivity {
                     for (int i=0; i<travelerCount; i++) {
                         getLastBooking(tripStart, tripEnd, selectedPackage, regionId, selectedClass);
                         Toast.makeText(getApplicationContext(),"Booking created successfully!",Toast.LENGTH_SHORT).show();
+                        resetFields();
                     }
                 } catch (JSONException | InterruptedException e) {
                     throw new RuntimeException(e);
@@ -232,6 +240,12 @@ public class BookingFormActivity extends AppCompatActivity {
 
     public void resetFields() {
         spCustomers.setSelection(0);
+        etTravelerCount.getText().clear();
+        spPackages.setSelection(0);
+        etTripStart.getText().clear();
+        etTripEnd.getText().clear();
+        spTripTypes.setSelection(0);
+        spClass.setSelection(0);
     }
 
     // Handles loading in all customers onto drop down menu (spinner)
