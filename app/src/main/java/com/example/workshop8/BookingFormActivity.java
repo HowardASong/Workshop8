@@ -164,8 +164,11 @@ public class BookingFormActivity extends AppCompatActivity {
                 }
 
                 try {
-                    getLastBooking(tripStart, tripEnd, selectedPackage, regionId, selectedClass);
-                } catch (JSONException e) {
+                    Thread.sleep(2000);
+                    for (int i=0; i<travelerCount; i++) {
+                        getLastBooking(tripStart, tripEnd, selectedPackage, regionId, selectedClass);
+                    }
+                } catch (JSONException | InterruptedException e) {
                     throw new RuntimeException(e);
                 }
             }
