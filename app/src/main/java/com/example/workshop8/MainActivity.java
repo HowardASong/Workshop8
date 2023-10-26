@@ -1,13 +1,20 @@
 package com.example.workshop8;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import android.view.MenuItem;
 import android.content.Intent;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -16,7 +23,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Controls the keyboard
+        final InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+
         EditText editPersonName = findViewById(R.id.editPersonName);
+
+        // Hide the keyboard initially
+        inputMethodManager.hideSoftInputFromWindow(editPersonName.getWindowToken(), 0);
 
         editPersonName.addTextChangedListener(new TextWatcher() {
             @Override
@@ -28,13 +41,23 @@ public class MainActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 // Handle text changes
                 String searchText = charSequence.toString();
-                // Perform search based on searchText
-                // Update your UI accordingly
+
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
                 // Handle after text changes
+            }
+        });
+
+        // Sets listener to show the keyboard when it's clicked
+        editPersonName.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    // Show the keyboard
+                    inputMethodManager.showSoftInput(editPersonName, InputMethodManager.SHOW_FORCED);
+                }
             }
         });
 
@@ -65,5 +88,31 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
+
+        // Find the Sign In button by its ID
+        Button signInButton = findViewById(R.id.signInButton);
+
+        // Set an OnClickListener for the Sign In button
+        signInButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent registrationIntent = new Intent(MainActivity.this, RegisterActivity.class);
+                startActivity(registrationIntent);
+            }
+        });
+    }
+
+    // Handles the mail notification feature
+    public void onMailIconClick(View view) {
+        View redDot = findViewById(R.id.redDot);
+
+        if (redDot.getVisibility() == View.VISIBLE) {
+            // Red dot is visible, show the notification message
+            Toast.makeText(this, "You have a new notification!", Toast.LENGTH_SHORT).show();
+        } else {
+            // Red dot is not visible, show "No Notifications"
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("No Notifications").show();
+        }
     }
 }
