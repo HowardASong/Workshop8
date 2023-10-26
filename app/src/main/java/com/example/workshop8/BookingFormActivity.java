@@ -66,6 +66,7 @@ public class BookingFormActivity extends AppCompatActivity {
         loadTripTypes();
         loadClasses();
 
+        // Automatically adds dashes between year, month and day as user types
         etTripStart.addTextChangedListener(new TextWatcher() {
             int prevL = 0;
             @Override
@@ -103,6 +104,7 @@ public class BookingFormActivity extends AppCompatActivity {
         });
     }
 
+    // Handles loading in all customers onto drop down menu (spinner)
     private void loadCustomers() {
         String url = "http://10.0.2.2:8080/Workshop7-1.0-SNAPSHOT/api/booking/getallcustomers";
         RequestQueue queue = Volley.newRequestQueue(this);
@@ -148,6 +150,7 @@ public class BookingFormActivity extends AppCompatActivity {
         queue.add(jsonArrayRequest);
     }
 
+    // Handles loading in all packages onto drop down menu
     private void loadPackages() {
         String url = "http://10.0.2.2:8080/Workshop7-1.0-SNAPSHOT/api/booking/getallpackages";
         RequestQueue queue = Volley.newRequestQueue(this);
@@ -185,6 +188,7 @@ public class BookingFormActivity extends AppCompatActivity {
         queue.add(jsonArrayRequest);
     }
 
+    // Handles loading in all trip types onto drop down menu
     private void loadTripTypes() {
         String url = "http://10.0.2.2:8080/Workshop7-1.0-SNAPSHOT/api/booking/getalltriptypes";
         RequestQueue queue = Volley.newRequestQueue(this);
@@ -216,6 +220,7 @@ public class BookingFormActivity extends AppCompatActivity {
         queue.add(jsonArrayRequest);
     }
 
+    // Handles loading in all classes onto drop down menu
     private void loadClasses() {
         String url = "http://10.0.2.2:8080/Workshop7-1.0-SNAPSHOT/api/booking/getallclasses";
         RequestQueue queue = Volley.newRequestQueue(this);
