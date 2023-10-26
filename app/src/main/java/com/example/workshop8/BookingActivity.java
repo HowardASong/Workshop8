@@ -32,6 +32,7 @@ public class BookingActivity extends AppCompatActivity {
     ListView lvBook;
     Spinner spinCustomer;
     RequestQueue requestQueue;
+    Button btnCreate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +41,7 @@ public class BookingActivity extends AppCompatActivity {
         requestQueue = Volley.newRequestQueue(this);
         lvBook = findViewById(R.id.lvBook);
         spinCustomer = findViewById(R.id.spinCustomer);
+        btnCreate = findViewById(R.id.btnCreate);
 
         //get customers
         Executors.newSingleThreadExecutor().execute(new GetAllCustomers());
@@ -169,7 +171,6 @@ public class BookingActivity extends AppCompatActivity {
                         BookingsAdapter adapter = new BookingsAdapter(BookingActivity.this, bookingsList);
                         lvBook.setAdapter(adapter);
 
-                        // Add an item click listener to handle launching the BookingDetailsActivity
                         lvBook.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                             @Override
                             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

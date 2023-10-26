@@ -2,6 +2,7 @@
 
     import androidx.appcompat.app.AppCompatActivity;
     import android.os.Bundle;
+    import android.widget.Button;
     import android.widget.EditText;
 
     import com.android.volley.Request;
@@ -18,13 +19,14 @@
 
     public class BookingDetailsActivity extends AppCompatActivity {
         public static final String EXTRA_BOOKING_ID = "bookingID";
-
+        Button btnDeleteBooking;
         EditText etBookingDetailId, etStartDate, etEndDate, etDescription, etDestination, etPrice, etBookingId, etRegion, etFee, etClass;
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_booking_details);
+            btnDeleteBooking = findViewById(R.id.btnDeleteBooking);
             etBookingDetailId = findViewById(R.id.etBookDetailId);
             etStartDate = findViewById(R.id.etStartDate);
             etEndDate = findViewById(R.id.etEndDate);
