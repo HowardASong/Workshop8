@@ -131,6 +131,7 @@ public class BookingFormActivity extends AppCompatActivity {
                 String tripEnd = etTripEnd.getText().toString();
                 TripTypes selectedTripType = (TripTypes) spTripTypes.getSelectedItem();
                 Classes selectedClass = (Classes) spClass.getSelectedItem();
+                String regionId;
 
                 String bookingJson = "{" +
                         "'bookingDate': '" + currentDate + "Z" + "', " +
@@ -149,17 +150,45 @@ public class BookingFormActivity extends AppCompatActivity {
                     Log.e("Booking JSON", "Invalid Json string");
                 }
 
-                String bookingDetailsJson = "{" +
-                        "'itineraryNo': " + 0 + ", " +
-                        "'tripStart': '" + tripStart + "', " +
-                        "'tripEnd': '" + tripEnd + "', " +
-                        "'description': '" + selectedPackage.getPkgDesc() + "', " +
-                        "'destination': '" + " " + "', " +
-                        "'basePrice': " + selectedPackage.getPkgBasePrice() + ", " +
-                        "'agencyCommission': " + selectedPackage.getPkgAgencyCommission() + ", " +
-                        "'bookingId'";
+                if (selectedPackage.getPackageId() == 1) {
+                    regionId = "SA";
+                }
+                else if (selectedPackage.getPackageId() == 2) {
+                    regionId = "NA";
+                }
+                else if (selectedPackage.getPackageId() == 3) {
+                    regionId = "ASIA";
+                }
+                else {
+                    regionId = "EU";
+                }
+
+                try {
+                    getLastBooking(tripStart, tripEnd, selectedPackage, regionId, selectedClass);
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
+    }
+
+    private String buildBookingDetailsJson(String tripStart, String tripEnd, Packages selectedPackage,
+                                           Bookings lastBooking, String regionId, Classes selectedClass) {
+        String bookingDetailsJson = "{" +
+                "'itineraryNo': " + 0 + ", " +
+                "'tripStart': '" + tripStart + "', " +
+                "'tripEnd': '" + tripEnd + "', " +
+                "'description': '" + selectedPackage.getPkgDesc() + "', " +
+                "'destination': '" + " " + "', " +
+                "'basePrice': " + selectedPackage.getPkgBasePrice() + ", " +
+                "'agencyCommission': " + selectedPackage.getPkgAgencyCommission() + ", " +
+                "'bookingId': " + lastBooking.getBookingId() + ", " +
+                "'regionId': '" + regionId + "', " +
+                "'classId': '" + selectedClass.getClassId() + "', " +
+                "'feeId': '" + "BK" + "', " +
+                "'productSupplierId': " + null + "" +
+                "}";
+        return bookingDetailsJson;
     }
 
     public static String generateRandomString() {
@@ -324,6 +353,39 @@ public class BookingFormActivity extends AppCompatActivity {
         queue.add(jsonArrayRequest);
     }
 
+    private void getLastBooking(String tripStart, String tripEnd, Packages selectedPackage,
+                                String regionId, Classes selectedClass) throws JSONException {
+        String url = "http://10.0.2.2:8080/Workshop7-1.0-SNAPSHOT/api/booking/getlastbooking";
+        RequestQueue queue = Volley.newRequestQueue(this);
+        Bookings lastBooking = new Bookings();
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            int bookingId = response.getInt("bookingId");
+                            Log.d("test",bookingId+"");
+                            lastBooking.setBookingId(bookingId);
+                            String bookingDetailsJson = buildBookingDetailsJson(tripStart, tripEnd, selectedPackage, lastBooking,
+                                    regionId, selectedClass);
+                            Log.d("test", bookingDetailsJson);
+                            JSONObject bookingDetailsObject = new JSONObject(bookingDetailsJson);
+                            postBookingDetails(bookingDetailsObject);
+
+                        } catch (JSONException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("Error1", error.toString());
+            }
+        });
+        queue.add(request);
+
+    }
+
     private void postBooking(JSONObject bookingJson) {
         String url = "http://10.0.2.2:8080/Workshop7-1.0-SNAPSHOT/api/booking/postbooking";
         RequestQueue queue = Volley.newRequestQueue(this);
@@ -337,6 +399,25 @@ public class BookingFormActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.d("Error", error.getMessage());
+            }
+        }
+        );
+        queue.add(request);
+    }
+
+    private void postBookingDetails(JSONObject bookingDetailsJson) {
+        String url = "http://10.0.2.2:8080/Workshop7-1.0-SNAPSHOT/api/booking/postbookingdetail";
+        RequestQueue queue = Volley.newRequestQueue(this);
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, bookingDetailsJson,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.d("In postBookingDetail","Success?: " + response.toString());
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("Error2", error.getMessage());
             }
         }
         );
