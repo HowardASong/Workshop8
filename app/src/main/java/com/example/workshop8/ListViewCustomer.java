@@ -8,9 +8,9 @@ public class ListViewCustomer implements Serializable {
     private String CustLastName;
 
     public ListViewCustomer(int customerId, String custFirstName, String custLastName) {
-        CustomerId = customerId;
-        CustFirstName = custFirstName;
-        CustLastName = custLastName;
+        this.CustomerId = customerId;
+        this.CustFirstName = custFirstName;
+        this.CustLastName = custLastName;
     }
 
     public int getCustomerId() {
@@ -35,5 +35,10 @@ public class ListViewCustomer implements Serializable {
 
     public void setCustLastName(String custLastName) {
         CustLastName = custLastName;
+    }
+
+    @Override
+    public String toString() {
+        return CustomerId + " " + CustFirstName + " " + CustLastName;
     }
 }

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -50,9 +51,9 @@ public class CustomerActivity extends AppCompatActivity {
         lvCustomers.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                ListViewCustomer agent = (ListViewCustomer) lvCustomers.getAdapter().getItem(position);
+                ListViewCustomer cust = (ListViewCustomer) lvCustomers.getAdapter().getItem(position);
                 Intent intent = new Intent(getApplicationContext(), CustomerDetailsActivity.class);
-                intent.putExtra("listviewcustomer", agent);
+                intent.putExtra("listviewcustomer", cust);
                 startActivity(intent);
             }
         });
@@ -60,27 +61,26 @@ public class CustomerActivity extends AppCompatActivity {
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), CustomerDetailsActivity.class);
+                Intent intent = new Intent(getApplicationContext(), CustomerAddActivity.class);
                 startActivity(intent);
             }
         });
-
-
-
     }
 
     class GetCustomers implements Runnable{
         @Override
         public void run() {
             StringBuffer buffer = new StringBuffer();
-            String url = "localhost:8080/Workshop7-1.0-SNAPSHOT/api/getallcustomers";
+            String url = "http://10.0.2.2:8080/Workshop7-1.0-SNAPSHOT/api/booking/getallcustomers";
             StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
 
                 @Override
                 public void onResponse(String response) {
+                    VolleyLog.wtf(response, "utf-8");
                     ArrayAdapter<ListViewCustomer> adapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_list_item_1);
                     try {
                         JSONArray jsonArray = new JSONArray(response);
+                        Log.d("test", jsonArray.toString());
                         for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject cust = jsonArray.getJSONObject(i);
                             ListViewCustomer customer = new ListViewCustomer(cust.getInt("customerId"), cust.getString("custFirstName"), cust.getString("custLastName"));
@@ -104,7 +104,6 @@ public class CustomerActivity extends AppCompatActivity {
                     VolleyLog.wtf(error.getMessage(), "utf-8");
                 }
             });
-
             requestQueue.add(stringRequest);
         }
    }
