@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         // Find the Sign In button by its ID
-        Button signInButton = findViewById(R.id.signInButton);
+        Button signInButton = findViewById(R.id.main_signup_btn);
 
         // Set an OnClickListener for the Sign In button
         signInButton.setOnClickListener(new View.OnClickListener() {

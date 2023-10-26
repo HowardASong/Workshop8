@@ -207,7 +207,7 @@
                     android:layout_width="488dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="40dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="25dp"
                     android:layout_marginEnd="25dp"
                     android:layout_weight="1"
                     android:background="@drawable/white_background"
@@ -223,10 +223,11 @@
                 <!-- Mail Icon -->
                 <ImageView
                     android:id="@+id/imageView3"
-                    android:layout_width="wrap_content"
+                    android:layout_width="40dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="25"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="2dp"
+                    android:baselineAligned="false"
                     android:src="@drawable/mail_icon" />
 
                 <View
@@ -234,7 +235,7 @@
                     android:layout_width="12dp"
                     android:layout_height="12dp"
                     android:layout_marginTop="-5dp"
-                    android:layout_marginEnd="10dp"
+                    android:layout_marginEnd="20dp"
                     android:background="@drawable/red_dot_icon"
                     android:visibility="gone" />
             </LinearLayout>
@@ -272,7 +273,7 @@
                     app:layout_constraintVertical_bias="0.644" />
 
                 <Button
-                    android:id="@+id/signInButton"
+                    android:id="@+id/main_signup_btn"
                     style="@style/CustomButtonStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
