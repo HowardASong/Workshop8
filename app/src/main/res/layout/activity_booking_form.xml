@@ -21,17 +21,18 @@
         android:id="@+id/textView19"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="60dp"
         android:text="Customer: "
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView17" />
 
     <Spinner
         android:id="@+id/spCustomers"
-        android:layout_width="231dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_width="230dp"
+        android:layout_height="28dp"
+        android:layout_marginTop="60dp"
         android:layout_marginEnd="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView17" />
@@ -41,16 +42,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="28dp"
         android:text="Traveler Count: "
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView19" />
 
     <EditText
         android:id="@+id/etTravelerCount"
-        android:layout_width="231dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="28dp"
+        android:layout_width="190dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="18dp"
         android:layout_marginEnd="32dp"
         android:ems="10"
         android:inputType="number"
@@ -61,26 +63,27 @@
         android:id="@+id/textView21"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="28dp"
         android:text="Package: "
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView20" />
 
     <Spinner
         android:id="@+id/spPackages"
-        android:layout_width="231dp"
-        android:layout_height="24dp"
-        android:layout_marginTop="28dp"
+        android:layout_width="243dp"
+        android:layout_height="28dp"
+        android:layout_marginTop="23dp"
         android:layout_marginEnd="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etTravelerCount" />
 
     <EditText
         android:id="@+id/etTripStart"
-        android:layout_width="231dp"
+        android:layout_width="237dp"
         android:layout_height="45dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
         android:ems="10"
         android:hint="YYYY-MM-DD"
@@ -93,9 +96,10 @@
         android:id="@+id/textView22"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="28dp"
         android:text="Trip Start: "
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView21" />
 
@@ -103,21 +107,23 @@
         android:id="@+id/textView23"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="68dp"
-        android:layout_marginTop="56dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="28dp"
         android:text="Trip End: "
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView22" />
 
     <EditText
         android:id="@+id/etTripEnd"
-        android:layout_width="231dp"
+        android:layout_width="237dp"
         android:layout_height="45dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="12dp"
         android:layout_marginEnd="32dp"
         android:ems="10"
         android:hint="YYYY-MM-DD"
         android:inputType="date"
+        android:maxLength="10"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etTripStart" />
 
@@ -125,17 +131,18 @@
         android:id="@+id/textView24"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="28dp"
         android:text="Trip Type: "
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView23" />
 
     <Spinner
         android:id="@+id/spTripTypes"
-        android:layout_width="231dp"
-        android:layout_height="24dp"
-        android:layout_marginTop="32dp"
+        android:layout_width="237dp"
+        android:layout_height="28dp"
+        android:layout_marginTop="19dp"
         android:layout_marginEnd="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etTripEnd" />
@@ -144,17 +151,18 @@
         android:id="@+id/textView25"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="84dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="28dp"
         android:text="Class: "
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView24" />
 
     <Spinner
         android:id="@+id/spClass"
-        android:layout_width="231dp"
-        android:layout_height="24dp"
-        android:layout_marginTop="28dp"
+        android:layout_width="267dp"
+        android:layout_height="28dp"
+        android:layout_marginTop="27dp"
         android:layout_marginEnd="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spTripTypes" />
@@ -164,7 +172,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="68dp"
-        android:layout_marginBottom="172dp"
+        android:layout_marginBottom="120dp"
         android:text="Submit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -173,8 +181,8 @@
         android:id="@+id/btnClear"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="64dp"
-        android:layout_marginBottom="172dp"
+        android:layout_marginEnd="68dp"
+        android:layout_marginBottom="120dp"
         android:text="Clear"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
