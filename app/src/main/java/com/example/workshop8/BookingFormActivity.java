@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -38,6 +40,9 @@ public class BookingFormActivity extends AppCompatActivity {
     Button btnClear;
 
     private ArrayList<Customer> customerList = new ArrayList<>();
+    private ArrayList<Packages> packagesList = new ArrayList<>();
+    private ArrayList<TripTypes> tripTypesList = new ArrayList<>();
+    private ArrayList<Classes> classesList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +62,45 @@ public class BookingFormActivity extends AppCompatActivity {
         btnClear = findViewById(R.id.btnClear);
 
         loadCustomers();
+        loadPackages();
+        loadTripTypes();
+        loadClasses();
+
+        etTripStart.addTextChangedListener(new TextWatcher() {
+            int prevL = 0;
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                prevL = etTripStart.getText().toString().length();
+            }
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+            @Override
+            public void afterTextChanged(Editable editable) {
+                int length = editable.length();
+                if ((prevL < length) && (length == 4 || length == 7)) {
+                    editable.append("-");
+                }
+            }
+        });
+
+        etTripEnd.addTextChangedListener(new TextWatcher() {
+            int prevL = 0;
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                prevL = etTripEnd.getText().toString().length();
+            }
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+            @Override
+            public void afterTextChanged(Editable editable) {
+                int length = editable.length();
+                if ((prevL < length) && (length == 4 || length == 7)) {
+                    editable.append("-");
+                }
+            }
+        });
     }
 
     private void loadCustomers() {
@@ -100,6 +144,105 @@ public class BookingFormActivity extends AppCompatActivity {
                 public void onErrorResponse(VolleyError error) {
                     Log.d("Error", error.toString());
                 }
+        });
+        queue.add(jsonArrayRequest);
+    }
+
+    private void loadPackages() {
+        String url = "http://10.0.2.2:8080/Workshop7-1.0-SNAPSHOT/api/booking/getallpackages";
+        RequestQueue queue = Volley.newRequestQueue(this);
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        for (int i=0; i<response.length(); i++) {
+                            try {
+                                JSONObject pkgObject = response.getJSONObject(i);
+                                int packageId = pkgObject.getInt("packageId");
+                                String pkgName = pkgObject.getString("pkgName");
+                                String pkgStartDate = pkgObject.getString("pkgStartDate");
+                                String pkgEndDate = pkgObject.getString("pkgEndDate");
+                                String pkgDesc = pkgObject.getString("pkgDesc");
+                                double pkgBasePrice = pkgObject.getDouble("pkgBasePrice");
+                                double pkgAgencyCommission = pkgObject.getDouble("pkgAgencyCommission");
+                                packagesList.add(new Packages(packageId, pkgName, pkgStartDate, pkgEndDate,
+                                        pkgDesc, pkgBasePrice, pkgAgencyCommission));
+
+                            } catch (JSONException e) {
+                                throw new RuntimeException(e);
+                            }
+                        }
+                        ArrayAdapter<Packages> packagesAdapter = new ArrayAdapter<Packages>(getApplicationContext(), android.R.layout.simple_spinner_item, packagesList);
+                        packagesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        spPackages.setAdapter(packagesAdapter);
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("Error", error.toString());
+            }
+        });
+        queue.add(jsonArrayRequest);
+    }
+
+    private void loadTripTypes() {
+        String url = "http://10.0.2.2:8080/Workshop7-1.0-SNAPSHOT/api/booking/getalltriptypes";
+        RequestQueue queue = Volley.newRequestQueue(this);
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        for (int i=0; i<response.length(); i++) {
+                            try {
+                                JSONObject ttObject = response.getJSONObject(i);
+                                String tripTypeId = ttObject.getString("tripTypeId");
+                                String ttName = ttObject.getString("ttName");
+                                tripTypesList.add(new TripTypes(tripTypeId, ttName));
+
+                            } catch (JSONException e) {
+                                throw new RuntimeException(e);
+                            }
+                        }
+                        ArrayAdapter<TripTypes> ttAdapter = new ArrayAdapter<TripTypes>(getApplicationContext(), android.R.layout.simple_spinner_item, tripTypesList);
+                        ttAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        spTripTypes.setAdapter(ttAdapter);
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("Error", error.toString());
+            }
+        });
+        queue.add(jsonArrayRequest);
+    }
+
+    private void loadClasses() {
+        String url = "http://10.0.2.2:8080/Workshop7-1.0-SNAPSHOT/api/booking/getallclasses";
+        RequestQueue queue = Volley.newRequestQueue(this);
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        for (int i=0; i<response.length(); i++) {
+                            try {
+                                JSONObject classObject = response.getJSONObject(i);
+                                String classId = classObject.getString("classId");
+                                String className = classObject.getString("className");
+                                classesList.add(new Classes(classId, className));
+
+                            } catch (JSONException e) {
+                                throw new RuntimeException(e);
+                            }
+                        }
+                        ArrayAdapter<Classes> classesAdapter = new ArrayAdapter<Classes>(getApplicationContext(), android.R.layout.simple_spinner_item, classesList);
+                        classesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        spClass.setAdapter(classesAdapter);
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("Error", error.toString());
+            }
         });
         queue.add(jsonArrayRequest);
     }
