@@ -128,7 +128,9 @@ public class BookingFormActivity extends AppCompatActivity {
                 int travelerCount = Integer.parseInt(etTravelerCount.getText().toString());
                 Packages selectedPackage = (Packages) spPackages.getSelectedItem();
                 String tripStart = etTripStart.getText().toString();
+                tripStart = formatDateString(tripStart);
                 String tripEnd = etTripEnd.getText().toString();
+                tripEnd = formatDateString(tripEnd);
                 TripTypes selectedTripType = (TripTypes) spTripTypes.getSelectedItem();
                 Classes selectedClass = (Classes) spClass.getSelectedItem();
                 String regionId;
@@ -206,6 +208,24 @@ public class BookingFormActivity extends AppCompatActivity {
         }
 
         return randomString.toString();
+    }
+
+    public String formatDateString(String inputDate) {
+        try {
+            SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+            Date date = inputFormat.parse(inputDate);
+
+            // Format the date with leading zeros for month and day
+            String formattedDate = outputFormat.format(date);
+
+            return formattedDate;
+        } catch (ParseException e) {
+            e.printStackTrace();
+            // Handle parsing errors here
+            return inputDate; // Return the original input date as a fallback
+        }
     }
 
     // Handles loading in all customers onto drop down menu (spinner)
