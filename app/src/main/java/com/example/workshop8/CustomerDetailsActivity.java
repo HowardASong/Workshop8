@@ -61,6 +61,7 @@ public class CustomerDetailsActivity extends AppCompatActivity {
         });
     }
 
+    // Deleting a customer
     private void deleteCustomer() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Confirmation");
@@ -88,7 +89,7 @@ public class CustomerDetailsActivity extends AppCompatActivity {
                         new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
-                                // HShow an error message
+                                // Show an error message
                                 String errorMessage = "An error occurred. Please try again later.";
                                 Toast.makeText(CustomerDetailsActivity.this, errorMessage, Toast.LENGTH_SHORT).show();
                             }
