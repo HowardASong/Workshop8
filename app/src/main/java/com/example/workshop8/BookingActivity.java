@@ -29,7 +29,6 @@ import java.util.List;
 import java.util.concurrent.Executors;
 
 public class BookingActivity extends AppCompatActivity {
-    private static final int REQUEST_CODE = 123;
 
     ListView lvBook;
     Spinner spinCustomer;
@@ -149,11 +148,10 @@ public class BookingActivity extends AppCompatActivity {
 
     private int getSelectedCustomerId(int selectedPosition) {
         if (selectedPosition > 0) {
-            // Position 0 is "Select a customer," so we subtract 1 to get the correct index in the customer list.
             Customer selectedCustomer = customersList.get(selectedPosition - 1);
             return selectedCustomer.getCustomerId();
         }
-        return -1; // Return -1 (or any suitable value) to indicate that no customer is selected.
+        return -1;
     }
 
 
@@ -168,8 +166,6 @@ public class BookingActivity extends AppCompatActivity {
         public void run() {
             if (customersList.size() > 0) {
                 String url = "http://10.0.2.2:8080/Workshop7-1.0-SNAPSHOT/api/booking/getbookings/" + customerId;
-
-
                 StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -215,7 +211,6 @@ public class BookingActivity extends AppCompatActivity {
 
                 requestQueue.add(stringRequest);
             } else {
-                // Handle the case where there are no customers in the list
                 Log.e("ERROR", "No customers available to fetch bookings.");
             }
         }
