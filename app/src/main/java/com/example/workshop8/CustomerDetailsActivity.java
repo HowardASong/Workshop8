@@ -31,7 +31,7 @@ public class CustomerDetailsActivity extends AppCompatActivity {
     Button btnSave, btnDelete;
     EditText etCustomerId, etCustFirstName, etCustLastName, etCustAddress, etCustCity, etCustProv, etCustPostal, etCustCountry, etCustHomePhone, etCustBusPhone, etCustEmail, etAgentId;
     RequestQueue requestQueue;
-    int customerId;
+    Customer selectedCustomer;
     ListViewCustomer listViewCust;
 
     @Override
@@ -58,49 +58,20 @@ public class CustomerDetailsActivity extends AppCompatActivity {
         requestQueue = Volley.newRequestQueue(this);
 
         Intent intent = getIntent();
-        listViewCust = (ListViewCustomer) intent.getSerializableExtra("listviewcustomer");
+        selectedCustomer = (Customer) intent.getSerializableExtra("selectedCustomer");
 
-        String url = "http://10.0.2.2:8080/Workshop7-1.0-SNAPSHOT/api/booking/getallcustomers" + customerId;
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
-
-            @Override
-            public void onResponse(String response) {
-                VolleyLog.wtf(response, "utf-8");
-                JSONObject cust = null;
-                try {
-                    cust = new JSONObject(response);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                final JSONObject finalCust = cust;
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            etCustomerId.setText(finalCust.getInt("customerId") + "");
-                            etCustFirstName.setText(finalCust.getString("custFirstName"));
-                            etCustLastName.setText(finalCust.getString("custLastName"));
-                            etCustAddress.setText(finalCust.getString("custAddress"));
-                            etCustCity.setText(finalCust.getString("custCity"));
-                            etCustProv.setText(finalCust.getString("custProv"));
-                            etCustPostal.setText(finalCust.getString("custPostal"));
-                            etCustCountry.setText(finalCust.getString("custCountry"));
-                            etCustHomePhone.setText(finalCust.getString("custHomePhone"));
-                            etCustBusPhone.setText(finalCust.getString("custBusPhone"));
-                            etCustEmail.setText(finalCust.getString("custEmail"));
-                            etAgentId.setText(finalCust.getInt("agentId") + "");
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                });
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                VolleyLog.wtf(error.getMessage(), "utf-8");
-            }
-        });
+        etCustomerId.setText(selectedCustomer.getCustomerId() + "");
+        etCustFirstName.setText(selectedCustomer.getCustFirstName());
+        etCustLastName.setText(selectedCustomer.getCustLastName());
+        etCustAddress.setText(selectedCustomer.getCustAddress());
+        etCustCity.setText(selectedCustomer.getCustCity());
+        etCustProv.setText(selectedCustomer.getCustProv());
+        etCustPostal.setText(selectedCustomer.getCustPostal());
+        etCustCountry.setText(selectedCustomer.getCustCountry());
+        etCustHomePhone.setText(selectedCustomer.getCustHomePhone());
+        etCustBusPhone.setText(selectedCustomer.getCustBusPhone());
+        etCustEmail.setText(selectedCustomer.getCustEmail());
+        etAgentId.setText(selectedCustomer.getAgentId() + "");
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

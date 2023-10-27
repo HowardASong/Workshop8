@@ -1,6 +1,8 @@
 package com.example.workshop8;
 
-public class Customer {
+import java.io.Serializable;
+
+public class Customer implements Serializable {
     private int CustomerId;
     private String CustFirstName;
     private String CustLastName;
