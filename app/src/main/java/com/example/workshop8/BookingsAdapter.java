@@ -21,12 +21,6 @@ public class BookingsAdapter extends ArrayAdapter<Bookings> {
         this.context = context;
         this.bookingsList = bookingsList;
     }
-
-    public void setBookingsList(List<Bookings> bookingsList) {
-        this.bookingsList = bookingsList;
-        notifyDataSetChanged();
-    }
-
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {

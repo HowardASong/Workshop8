@@ -107,7 +107,6 @@
                     }
                 });
                 requestQueue.add(stringRequest);
-
                 btnDeleteBooking.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -117,10 +116,8 @@
                 });
 
             } else {
-                // aaaaaaaaaa
             }
         }
-
         private void deleteBooking(int bookingId) {
             String deleteUrl = "http://10.0.2.2:8080/Workshop7-1.0-SNAPSHOT/api/booking/deletebooking/" + bookingId;
 
@@ -128,7 +125,6 @@
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
-                            Log.d("TEST", "Delete Booking");
                             Toast.makeText(BookingDetailsActivity.this, "Booking deleted successfully", Toast.LENGTH_SHORT).show();
                             setResult(RESULT_OK);
                             finish();
@@ -141,7 +137,6 @@
                             Toast.makeText(BookingDetailsActivity.this, "Failed to delete booking", Toast.LENGTH_SHORT).show();
                         }
                     });
-
             RequestQueue requestQueue = Volley.newRequestQueue(this);
             requestQueue.add(deleteRequest);
         }
