@@ -70,6 +70,7 @@ public class CustomerActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), CustomerAddActivity.class);
+                intent.putExtra("mode", "add");
                 startActivity(intent);
             }
         });

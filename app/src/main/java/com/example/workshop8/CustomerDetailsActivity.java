@@ -35,6 +35,8 @@ public class CustomerDetailsActivity extends AppCompatActivity {
     Customer selectedCustomer;
     ListViewCustomer listViewCust;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,6 +91,7 @@ public class CustomerDetailsActivity extends AppCompatActivity {
         });
     }
 
+
     private void saveCustomer() {
         String customerJsonString = "{" +
                 "'customerId': " + Integer.parseInt(etCustomerId.getText().toString()) + ", " +
@@ -115,13 +118,16 @@ public class CustomerDetailsActivity extends AppCompatActivity {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        Log.d("Test", response.toString())
-                        ;
+                        Toast.makeText(CustomerDetailsActivity.this, "Customer successfully updated", Toast.LENGTH_SHORT).show();
+                        // Navigate back to the customer list activity
+                        Intent intent = new Intent(CustomerDetailsActivity.this, CustomerActivity.class);
+                        startActivity(intent);
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d("Error", error.getMessage());
+                String errorMessage = "An error occurred. Please try again later.";
+                Toast.makeText(CustomerDetailsActivity.this, errorMessage, Toast.LENGTH_SHORT).show();
             }
         }
         );
@@ -140,7 +146,7 @@ public class CustomerDetailsActivity extends AppCompatActivity {
                 int customerId = Integer.parseInt(etCustomerId.getText().toString());
 
                 // URL of API
-                String deleteUrl = "http://10.0.2.2:8080/Workshop7-1.0-SNAPSHOT/api/customers/deletecustomer/{customerId}" + customerId;
+                String deleteUrl = "http://10.0.2.2:8080/Workshop7-1.0-SNAPSHOT/api/customers/deletecustomer/" + customerId;
 
                 StringRequest deleteRequest = new StringRequest(Request.Method.DELETE, deleteUrl,
                         new Response.Listener<String>() {
