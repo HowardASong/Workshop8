@@ -22,11 +22,29 @@
     import org.json.JSONException;
     import org.json.JSONObject;
 
+    import java.util.regex.Matcher;
+    import java.util.regex.Pattern;
+
     public class BookingDetailsActivity extends AppCompatActivity {
         public static final String EXTRA_BOOKING_ID = "bookingID";
         Button btnDeleteBooking;
         EditText etBookingDetailId, etStartDate, etEndDate, etDescription, etDestination, etPrice, etBookingId, etRegion, etFee, etClass;
 
+        private String extractDatePart(String dateWithTime) {
+            // Define a regex pattern to match the date format "MMM dd, yyyy"
+            Pattern pattern = Pattern.compile("([A-Za-z]{3} \\d{1,2}, \\d{4})");
+
+            // Create a Matcher object and match it against the dateWithTime string
+            Matcher matcher = pattern.matcher(dateWithTime);
+
+            if (matcher.find()) {
+                // Extract and return the matched date part
+                return matcher.group(1);
+            } else {
+                // Handle invalid date format
+                return dateWithTime; // Return the original string
+            }
+        }
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
@@ -45,6 +63,26 @@
             btnDeleteBooking.setVisibility(View.INVISIBLE); // set invisible by default
             int bookingId = getIntent().getIntExtra(EXTRA_BOOKING_ID, -1);
 
+            etBookingDetailId.setFocusable(false);
+            etBookingDetailId.setFocusableInTouchMode(false);
+            etStartDate.setFocusable(false);
+            etStartDate.setFocusableInTouchMode(false);
+            etEndDate.setFocusable(false);
+            etEndDate.setFocusableInTouchMode(false);
+            etDescription.setFocusable(false);
+            etDescription.setFocusableInTouchMode(false);
+            etDestination.setFocusable(false);
+            etDestination.setFocusableInTouchMode(false);
+            etBookingId.setFocusable(false);
+            etBookingId.setFocusableInTouchMode(false);
+            etRegion.setFocusable(false);
+            etRegion.setFocusableInTouchMode(false);
+            etFee.setFocusable(false);
+            etFee.setFocusableInTouchMode(false);
+            etClass.setFocusable(false);
+            etClass.setFocusableInTouchMode(false);
+            etPrice.setFocusable(false);
+            etPrice.setFocusableInTouchMode(false);
 
             btnDeleteBooking.setVisibility(View.INVISIBLE);
             if (bookingId != -1) {
@@ -71,6 +109,9 @@
                                     String travelClass = bookingDetailsJson.optString("classId", "No data available");
                                     int bookingId = bookingDetailsJson.optInt("bookingId", 0);
 
+                                    startDate = extractDatePart(startDate);
+                                    endDate = extractDatePart(endDate);
+
                                     etBookingDetailId.setText(String.valueOf(bookingDetailId));
                                     etStartDate.setText(startDate);
                                     etEndDate.setText(endDate);
@@ -82,15 +123,15 @@
                                     etClass.setText(travelClass);
                                     etBookingId.setText(String.valueOf(bookingId));
                                 } else {
-                                    etBookingDetailId.setText("No data available");
-                                    etStartDate.setText("No data available");
-                                    etEndDate.setText("No data available");
-                                    etDescription.setText("No data available");
-                                    etDestination.setText("No data available");
-                                    etPrice.setText("No data available");
-                                    etRegion.setText("No data available");
-                                    etFee.setText("No data available");
-                                    etClass.setText("No data available");
+                                    etBookingDetailId.setText("Not Available");
+                                    etStartDate.setText("Not Available");
+                                    etEndDate.setText("Not Available");
+                                    etDescription.setText("Not Available");
+                                    etDestination.setText("Not Available");
+                                    etPrice.setText("Not Available");
+                                    etRegion.setText("Not Available");
+                                    etFee.setText("Not Available");
+                                    etClass.setText("Not Available");
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -110,7 +151,6 @@
                 btnDeleteBooking.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        // Send a DELETE request to delete the booking
                         deleteBooking(bookingId);
                     }
                 });
