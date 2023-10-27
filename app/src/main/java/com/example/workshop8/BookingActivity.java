@@ -29,10 +29,13 @@ import java.util.List;
 import java.util.concurrent.Executors;
 
 public class BookingActivity extends AppCompatActivity {
+    private static final int REQUEST_CODE = 123;
+
     ListView lvBook;
     Spinner spinCustomer;
     RequestQueue requestQueue;
     Button btnCreate;
+    List<Customer> customersList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +45,7 @@ public class BookingActivity extends AppCompatActivity {
         lvBook = findViewById(R.id.lvBook);
         spinCustomer = findViewById(R.id.spinCustomer);
         btnCreate = findViewById(R.id.btnCreate);
+        customersList = new ArrayList<>();
 
         //get customers
         Executors.newSingleThreadExecutor().execute(new GetAllCustomers());
@@ -64,7 +68,6 @@ public class BookingActivity extends AppCompatActivity {
                             @Override
                             public void run() {
                                 try {
-                                    List<Customer> customersList = new ArrayList<>();
                                     List<String> customerNames = new ArrayList<>();
                                     customerNames.add("Select a customer"); // Add "Select a customer" as the first item.
 
@@ -104,13 +107,14 @@ public class BookingActivity extends AppCompatActivity {
                                         @Override
                                         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                                             if (position > 0) {
-                                                // Position 0 is "Select a customer", so ignore it and proceed to get the customerId.
-                                                Customer selectedCustomer = customersList.get(position - 1); // Subtract 1 to account for the "Select a customer" item.
-                                                int customerId = selectedCustomer.getCustomerId();
-                                                Log.d("TEST", String.valueOf(customerId));
-                                                Executors.newSingleThreadExecutor().execute(new GetSelectedBooking(customerId));
-                                            } else { // Clear the ListView when "Select a customer" is selected
-                                                lvBook.setAdapter(null);
+                                                if (position > 0) {
+                                                    // Position 0 is "Select a customer," so ignore it and proceed to get the customerId.
+                                                    int customerId = getSelectedCustomerId(position);
+                                                    Log.d("TEST", String.valueOf(customerId));
+                                                    Executors.newSingleThreadExecutor().execute(new GetSelectedBooking(customerId));
+                                                } else { // Clear the ListView when "Select a customer" is selected
+                                                    lvBook.setAdapter(null);
+                                                }
                                             }
                                         }
 
@@ -143,6 +147,16 @@ public class BookingActivity extends AppCompatActivity {
         }
     }
 
+    private int getSelectedCustomerId(int selectedPosition) {
+        if (selectedPosition > 0) {
+            // Position 0 is "Select a customer," so we subtract 1 to get the correct index in the customer list.
+            Customer selectedCustomer = customersList.get(selectedPosition - 1);
+            return selectedCustomer.getCustomerId();
+        }
+        return -1; // Return -1 (or any suitable value) to indicate that no customer is selected.
+    }
+
+
     class GetSelectedBooking implements Runnable {
         private int customerId;
 
@@ -152,52 +166,58 @@ public class BookingActivity extends AppCompatActivity {
 
         @Override
         public void run() {
-            String url = "http://10.0.2.2:8080/Workshop7-1.0-SNAPSHOT/api/booking/getbookings/" + customerId;
+            if (customersList.size() > 0) {
+                String url = "http://10.0.2.2:8080/Workshop7-1.0-SNAPSHOT/api/booking/getbookings/" + customerId;
 
-            StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
-                @Override
-                public void onResponse(String response) {
-                    try {
-                        JSONArray bookingsArray = new JSONArray(response);
-                        List<Bookings> bookingsList = new ArrayList<>();
-                        for (int i = 0; i < bookingsArray.length(); i++) {
-                            JSONObject booking = bookingsArray.getJSONObject(i);
-                            Bookings bookingItem = new Bookings();
-                            bookingItem.setBookingId(booking.getInt("bookingId"));
-                            bookingsList.add(bookingItem);
-                        }
 
-                        // Create a custom adapter to display the bookings
-                        BookingsAdapter adapter = new BookingsAdapter(BookingActivity.this, bookingsList);
-                        lvBook.setAdapter(adapter);
-
-                        lvBook.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                            @Override
-                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                if (position >= 0 && position < bookingsList.size()) {
-                                    Bookings selectedBooking = bookingsList.get(position);
-                                    int bookingId = selectedBooking.getBookingId();
-
-                                    // Create an intent to start the BookingDetailsActivity
-                                    Intent intent = new Intent(BookingActivity.this, BookingDetailsActivity.class);
-                                    intent.putExtra(BookingDetailsActivity.EXTRA_BOOKING_ID, bookingId);
-                                    startActivity(intent);
-                                }
+                StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONArray bookingsArray = new JSONArray(response);
+                            List<Bookings> bookingsList = new ArrayList<>();
+                            for (int i = 0; i < bookingsArray.length(); i++) {
+                                JSONObject booking = bookingsArray.getJSONObject(i);
+                                Bookings bookingItem = new Bookings();
+                                bookingItem.setBookingId(booking.getInt("bookingId"));
+                                bookingsList.add(bookingItem);
                             }
-                        });
 
-                    } catch (JSONException e) {
-                        Log.e("ERROR", "SOMETHING HAPPENED HERE");
+                            // Create a custom adapter to display the bookings
+                            BookingsAdapter adapter = new BookingsAdapter(BookingActivity.this, bookingsList);
+                            lvBook.setAdapter(adapter);
+
+                            lvBook.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                @Override
+                                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                    if (position >= 0 && position < bookingsList.size()) {
+                                        Bookings selectedBooking = bookingsList.get(position);
+                                        int bookingId = selectedBooking.getBookingId();
+
+                                        // Create an intent to start the BookingDetailsActivity
+                                        Intent intent = new Intent(BookingActivity.this, BookingDetailsActivity.class);
+                                        intent.putExtra(BookingDetailsActivity.EXTRA_BOOKING_ID, bookingId);
+                                        startActivity(intent);
+                                    }
+                                }
+                            });
+
+                        } catch (JSONException e) {
+                            Log.e("ERROR", "SOMETHING HAPPENED HERE");
+                        }
                     }
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    VolleyLog.wtf(error.getMessage(), "utf-8");
-                }
-            });
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        VolleyLog.wtf(error.getMessage(), "utf-8");
+                    }
+                });
 
-            requestQueue.add(stringRequest);
+                requestQueue.add(stringRequest);
+            } else {
+                // Handle the case where there are no customers in the list
+                Log.e("ERROR", "No customers available to fetch bookings.");
+            }
         }
     }
 }

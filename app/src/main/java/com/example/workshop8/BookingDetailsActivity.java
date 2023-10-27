@@ -1,9 +1,14 @@
     package com.example.workshop8;
 
     import androidx.appcompat.app.AppCompatActivity;
+
+    import android.content.Intent;
     import android.os.Bundle;
+    import android.util.Log;
+    import android.view.View;
     import android.widget.Button;
     import android.widget.EditText;
+    import android.widget.Toast;
 
     import com.android.volley.Request;
     import com.android.volley.RequestQueue;
@@ -37,7 +42,11 @@
             etRegion = findViewById(R.id.etRegion);
             etFee = findViewById(R.id.etFee);
             etClass = findViewById(R.id.etClass);
+            btnDeleteBooking.setVisibility(View.INVISIBLE); // set invisible by default
             int bookingId = getIntent().getIntExtra(EXTRA_BOOKING_ID, -1);
+
+
+            btnDeleteBooking.setVisibility(View.INVISIBLE);
             if (bookingId != -1) {
                 String url = "http://10.0.2.2:8080/Workshop7-1.0-SNAPSHOT/api/booking/getbookingdetail/" + bookingId;
 
@@ -86,6 +95,7 @@
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
+                            btnDeleteBooking.setVisibility(View.VISIBLE);
                         } else {
                             etStartDate.setText("No data available");
                         }
@@ -96,10 +106,43 @@
                         VolleyLog.wtf(error.getMessage(), "utf-8");
                     }
                 });
-
                 requestQueue.add(stringRequest);
+
+                btnDeleteBooking.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        // Send a DELETE request to delete the booking
+                        deleteBooking(bookingId);
+                    }
+                });
+
             } else {
                 // aaaaaaaaaa
             }
+        }
+
+        private void deleteBooking(int bookingId) {
+            String deleteUrl = "http://10.0.2.2:8080/Workshop7-1.0-SNAPSHOT/api/booking/deletebooking/" + bookingId;
+
+            StringRequest deleteRequest = new StringRequest(Request.Method.DELETE, deleteUrl,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            Log.d("TEST", "Delete Booking");
+                            Toast.makeText(BookingDetailsActivity.this, "Booking deleted successfully", Toast.LENGTH_SHORT).show();
+                            setResult(RESULT_OK);
+                            finish();
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            VolleyLog.wtf(error.getMessage(), "utf-8");
+                            Toast.makeText(BookingDetailsActivity.this, "Failed to delete booking", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+            RequestQueue requestQueue = Volley.newRequestQueue(this);
+            requestQueue.add(deleteRequest);
         }
     }
