@@ -18,6 +18,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
@@ -89,6 +90,42 @@ public class CustomerDetailsActivity extends AppCompatActivity {
     }
 
     private void saveCustomer() {
+        String customerJsonString = "{" +
+                "'customerId': " + Integer.parseInt(etCustomerId.getText().toString()) + ", " +
+                "'custFirstName': '" + etCustFirstName.getText().toString() + "', " +
+                "'custLastName': '" + etCustLastName.getText().toString() + "', " +
+                "'custAddress': '" + etCustAddress.getText().toString() + "', " +
+                "'custCity': '" + etCustCity.getText().toString() + "', " +
+                "'custProv': '" + etCustProv.getText().toString() + "', " +
+                "'custPostal': '" + etCustPostal.getText().toString() + "', " +
+                "'custCountry': '" + etCustCountry.getText().toString() + "', " +
+                "'custHomePhone': '" + etCustHomePhone.getText().toString() + "', " +
+                "'custBusPhone': '" + etCustBusPhone.getText().toString() + "', " +
+                "'custEmail': '" + etCustEmail.getText().toString() + "', " +
+                "'agentId': '" + Integer.parseInt(etAgentId.getText().toString()) + "'}" ;
+        String url = "http://10.0.2.2:8080/Workshop7-1.0-SNAPSHOT/api/customers/updatecustomer";
+        RequestQueue queue = Volley.newRequestQueue(this);
+        JSONObject customerObject;
+        try {
+            customerObject = new JSONObject(customerJsonString);
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, customerObject,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.d("Test", response.toString())
+                        ;
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("Error", error.getMessage());
+            }
+        }
+        );
+        queue.add(request);
     }
 
     // Deleting a customer
