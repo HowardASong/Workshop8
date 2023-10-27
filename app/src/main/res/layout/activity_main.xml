@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -8,297 +7,465 @@
     android:layout_height="match_parent">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:layout_width="403dp"
-        android:layout_height="749dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:id="@+id/coordinatorLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         tools:context=".MainActivity">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="68dp">
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <LinearLayout
             android:id="@+id/linearLayout3"
-            android:layout_width="396dp"
-            android:layout_height="778dp"
-            android:orientation="horizontal"
-            app:layout_anchor="@+id/linearLayout5"
-            app:layout_anchorGravity="center">
+            android:layout_width="match_parent"
+            android:layout_height="68dp"
+            android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/textView18"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="TextView" />
+            <LinearLayout
+                android:layout_width="105dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintLayout"
-                android:layout_width="match_parent"
-                android:layout_height="209dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.5">
+                <ImageView
+                    android:id="@+id/image_pfp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="5dp"
+                    app:srcCompat="@drawable/logo_icon" />
+            </LinearLayout>
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/constraintLayout2"
-                    android:layout_width="398dp"
-                    android:layout_height="233dp"
-                    tools:layout_editor_absoluteX="1dp"
-                    tools:layout_editor_absoluteY="-20dp">
+            <LinearLayout
+                android:layout_width="183dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txt_location"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textColor="#8c8c8c"
+                    android:paddingTop="4dp"
+                    android:textSize="10dp"
+                    android:fontFamily="sans-serif-black"
+                    android:text="Location" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
 
                     <LinearLayout
-                        android:id="@+id/linearLayout2"
-                        android:layout_width="392dp"
-                        android:layout_height="59dp"
-                        android:orientation="vertical"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.533"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/linearLayout4"
-                        app:layout_constraintVertical_bias="0.0">
+                        android:layout_width="54dp"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
 
-                        <EditText
-                            android:id="@+id/editSearchBar"
-                            android:layout_width="352dp"
-                            android:layout_height="37dp"
-                            android:layout_marginLeft="20dp"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginBottom="10dp"
+                        <ImageView
+                            android:id="@+id/image_pin"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
                             android:layout_weight="1"
-                            android:background="@drawable/white_background"
-                            android:drawableStart="@drawable/search"
-                            android:drawablePadding="15dp"
-                            android:ems="10"
-                            android:hint="Search Destination..."
-                            android:inputType="textPersonName"
-                            android:padding="10dp"
-                            android:textSize="14sp"
-                            android:textStyle="italic" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/linearLayout4"
-                        android:layout_width="404dp"
-                        android:layout_height="99dp"
-                        android:background="@drawable/top_background"
-                        android:gravity="center"
-                        android:orientation="horizontal"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.326"
-                        tools:layout_editor_absoluteX="0dp">
-
-                        <!-- Search EditText -->
-
-                        <!-- Mail Icon -->
-
-                        <View
-                            android:id="@+id/redDot"
-                            android:layout_width="12dp"
-                            android:layout_height="12dp"
-                            android:layout_marginTop="-5dp"
-                            android:layout_marginEnd="20dp"
-                            android:background="@drawable/red_dot_icon"
-                            android:visibility="gone" />
-
-                        <TextView
-                            android:id="@+id/welcomeBackText"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="20dp"
-                            android:layout_marginBottom="20dp"
-                            android:text="Welcome!"
-                            android:textColor="@color/black"
-                            android:textSize="12sp"
-                            android:textStyle="bold" />
-
-                        <ImageView
-                            android:id="@+id/avatarIcon"
-                            android:layout_width="48dp"
-                            android:layout_height="48dp"
-                            android:layout_margin="20dp"
-                            android:layout_marginLeft="20dp"
-                            app:srcCompat="@drawable/avatar_icon" />
-
-                        <ImageView
-                            android:id="@+id/imageView3"
-                            android:layout_width="40dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="25dp"
-                            android:layout_marginBottom="10dp"
-                            android:baselineAligned="false"
-                            android:src="@drawable/mail_icon" />
-
+                            android:layout_marginTop="5dp"
+                            android:paddingLeft="40dp"
+                            app:srcCompat="@drawable/pinpoint_icon" />
                     </LinearLayout>
 
                     <TextView
-                        android:id="@+id/textView26"
-                        android:layout_width="396dp"
-                        android:layout_height="45dp"
-                        android:fontFamily="sans-serif-black"
-                        android:text="Start your Travel"
-                        android:textAlignment="center"
-                        android:textColor="@color/black"
-                        android:textSize="25dp"
-                        android:textStyle="bold"
-                        android:visibility="visible"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.0"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.0" />
+                        android:id="@+id/txt_location4"
+                        android:layout_width="129dp"
+                        android:layout_height="match_parent"
+                        android:paddingLeft="5dp"
+                        android:paddingTop="5dp"
+                        android:text="Calgary, AB"
+                        android:textAlignment="viewStart"
+                        android:textSize="13dp"
+                        android:textStyle="bold" />
+                </LinearLayout>
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
+                <ImageView
+                    android:id="@+id/image_notif"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="40dp"
+                    app:srcCompat="@drawable/notification_icon" />
+            </LinearLayout>
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/linearLayout5"
-            android:layout_width="415dp"
-            android:layout_height="132dp"
-            android:layout_gravity="center"
-            android:orientation="horizontal">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-            <!-- Icon 1 -->
             <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:layout_marginRight="20dp"
-                    android:background="@drawable/nature_icon" />
+                android:id="@+id/linearLayout6"
+                android:layout_width="396dp"
+                android:layout_height="67dp"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.666"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.096">
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:layout_marginRight="20dp"
+                    android:id="@+id/txt_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:fontFamily="sans-serif-smallcaps"
-                    android:text="Nature"
-                    android:textSize="14sp" />
-            </LinearLayout>
-
-            <!-- Icon 2 -->
-
-            <!-- Icon 3 -->
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:layout_marginRight="20dp"
-                    android:background="@drawable/mountains_icon" />
-
-                <TextView
-                    android:layout_width="94dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:layout_marginRight="20dp"
-                    android:fontFamily="sans-serif-smallcaps"
-                    android:text="Mountains"
-                    android:textAlignment="center"
-                    android:textSize="14sp" />
-            </LinearLayout>
-
-            <!-- Icon 4 -->
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:layout_marginRight="20dp"
-                    android:background="@drawable/ocean_icon" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:layout_marginRight="20dp"
-                    android:fontFamily="sans-serif-smallcaps"
-                    android:text="Ocean"
-                    android:textSize="14sp" />
+                    android:paddingTop="3dp"
+                    android:paddingLeft="20dp"
+                    android:text="Get Ready to Start
+                    your Travel!"
+                    android:textSize="25dp"
+                    android:textStyle="italic" />
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="20dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
+                android:id="@+id/linearLayout7"
+                android:layout_width="397dp"
+                android:layout_height="91dp"
+                android:layout_marginBottom="539dp"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout6"
+                app:layout_constraintVertical_bias="0.0">
 
-                <ImageView
-                    android:layout_width="85dp"
-                    android:layout_height="85dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginEnd="20dp"
-                    android:layout_marginRight="20dp"
-                    android:background="@drawable/monuments_icon" />
-
-                <TextView
+                <!-- Search EditText -->
+                <EditText
+                    android:id="@+id/editSearchBar"
                     android:layout_width="95dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginEnd="20dp"
-                    android:layout_marginRight="20dp"
-                    android:fontFamily="sans-serif-smallcaps"
-                    android:text="Monuments"
-                    android:textAlignment="center"
-                    android:textSize="14sp" />
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginBottom="15dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/white_background"
+                    android:drawableStart="@drawable/search"
+                    android:drawablePadding="15dp"
+                    android:ems="10"
+                    android:hint="Search Destination..."
+                    android:inputType="textPersonName"
+                    android:padding="10dp"
+                    android:textSize="14sp"
+                    android:textStyle="italic" />
             </LinearLayout>
-        </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout8"
+                android:layout_width="396dp"
+                android:layout_height="60dp"
+                android:layout_marginBottom="498dp"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout7">
+
+                <TextView
+                    android:id="@+id/txt_categories"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:paddingLeft="20dp"
+                    android:text="Categories"
+                    android:textSize="28dp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout9"
+                android:layout_width="408dp"
+                android:layout_height="81dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginBottom="268dp"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.444"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout8"
+                app:layout_constraintVertical_bias="0.0">
+
+                <LinearLayout
+                    android:layout_width="106dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/image_plane"
+                        android:layout_width="65dp"
+                        android:layout_height="65dp"
+                        android:layout_marginLeft="25dp"
+                        android:layout_marginTop="15dp"
+                        app:srcCompat="@drawable/plane_icon" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="96dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/image_ferry"
+                        android:layout_width="65dp"
+                        android:layout_height="65dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="15dp"
+                        app:srcCompat="@drawable/ferry_icon" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="99dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/image_transit"
+                        android:layout_width="55dp"
+                        android:layout_height="55dp"
+                        android:layout_marginLeft="25dp"
+                        android:layout_marginTop="20dp"
+                        app:srcCompat="@drawable/transit_icon" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/image_hotel"
+                        android:layout_width="55dp"
+                        android:layout_height="55dp"
+                        android:layout_marginLeft="25dp"
+                        android:layout_marginTop="20dp"
+                        app:srcCompat="@drawable/hotel_icon" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout10"
+                android:layout_width="396dp"
+                android:layout_height="41dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout9">
+
+                <LinearLayout
+                    android:layout_width="101dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/txt_plane"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-black"
+                        android:text="Plane"
+                        android:textAlignment="center" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="96dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/txt_ferry"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-black"
+                        android:text="Ferry"
+                        android:textAlignment="center" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="97dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/txt_transit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-black"
+                        android:text="Transit"
+                        android:textAlignment="center" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/txt_hotel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-black"
+                        android:text="Hotel"
+                        android:textAlignment="center" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout11"
+                android:layout_width="396dp"
+                android:layout_height="62dp"
+                android:layout_marginBottom="314dp"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout10">
+
+                <TextView
+                    android:id="@+id/txt_categories2"
+                    android:layout_width="552dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:paddingLeft="20dp"
+                    android:text="Popular Places"
+                    android:textSize="28dp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textView44"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:fontFamily="sans-serif-medium"
+                        android:paddingLeft="35dp"
+                        android:paddingTop="10dp"
+                        android:text="See More"
+                        android:textColor="#9966ff" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout12"
+                android:layout_width="399dp"
+                android:layout_height="152dp"
+                android:layout_marginEnd="7dp"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.266"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout11"
+                app:layout_constraintVertical_bias="0.0">
+
+                <ImageView
+                    android:id="@+id/imageView10"
+                    android:layout_width="334dp"
+                    android:layout_height="160dp"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/euro_img" />
+
+                <ImageView
+                    android:id="@+id/imageView11"
+                    android:layout_width="394dp"
+                    android:layout_height="161dp"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/carrib_img" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="396dp"
+                android:layout_height="44dp"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.65"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout12"
+                app:layout_constraintVertical_bias="0.0">
+
+                <LinearLayout
+                    android:layout_width="167dp"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/image_star"
+                        android:layout_width="150dp"
+                        android:layout_height="30dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/star_icon" />
+
+                    <TextView
+                        android:id="@+id/txt_europe"
+                        android:layout_width="193dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="sans-serif-black"
+                        android:text="European Delight" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/image_clickstar"
+                        android:layout_width="150dp"
+                        android:layout_height="35dp"
+                        android:paddingTop="5dp"
+                        android:layout_weight="1"
+                        android:paddingLeft="65dp"
+                        app:srcCompat="@drawable/startap_icon" />
+
+                    <TextView
+                        android:id="@+id/txt_carr"
+                        android:layout_width="137dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:fontFamily="sans-serif-black"
+                        android:text="Caribbean Adventure" />
+                </LinearLayout>
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-    <!--Navigation Bar-->
-    <!--<androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="598dp"
-        android:layout_height="159dp"
-        tools:context=".MainActivity"
-        tools:layout_editor_absoluteY="803dp">-->
-
+    <!-- Bottom App Bar -->
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bot_navappbar"
-        android:layout_width="410dp"
-        android:layout_height="108dp"
+        android:layout_width="395dp"
+        android:layout_height="116dp"
         android:gravity="bottom"
         app:fabCradleMargin="10dp"
         app:fabCradleRoundedCornerRadius="10dp"
@@ -306,10 +473,10 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.992"
-        tools:ignore="BottomAppBar">
+        app:layout_constraintTop_toTopOf="@+id/coordinatorLayout"
+        app:layout_constraintVertical_bias="0.992">
 
+        <!-- Bottom Navigation View -->
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bot_navbarview"
             android:layout_width="match_parent"
@@ -318,19 +485,16 @@
             android:background="@drawable/transparent_background"
             app:labelVisibilityMode="labeled"
             app:menu="@menu/menu_bar_bot" />
-
     </com.google.android.material.bottomappbar.BottomAppBar>
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/float_btn"
-            android:layout_width="58dp"
-            android:layout_height="54dp"
-            android:src="@drawable/baseline_arrowup"
-            app:layout_constraintBottom_toTopOf="@+id/bot_navappbar"
-            app:layout_constraintEnd_toEndOf="@+id/bot_navappbar"
-            app:layout_constraintStart_toStartOf="@+id/bot_navappbar"
-            app:layout_constraintTop_toTopOf="@+id/bot_navappbar" />
-
-
+    <!-- Floating Action Button -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/float_btn"
+        android:layout_width="58dp"
+        android:layout_height="54dp"
+        android:src="@drawable/baseline_arrowup"
+        app:layout_constraintTop_toTopOf="@+id/bot_navappbar"
+        app:layout_constraintStart_toStartOf="@+id/bot_navappbar"
+        app:layout_constraintEnd_toEndOf="@+id/bot_navappbar"
+        app:layout_constraintBottom_toTopOf="@+id/bot_navappbar" />
 </androidx.constraintlayout.widget.ConstraintLayout>
-<!--</androidx.constraintlayout.widget.ConstraintLayout>-->

@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-/*        // Find the Sign In button by its ID (TO BE IMPLENTED LATER)
+/*        // Find the Sign In button by its ID (TO BE IMPLEMENTED LATER)
         Button signInButton = findViewById(R.id.main_signup_btn);
 
         // Set an OnClickListener for the Sign In button
@@ -99,18 +99,4 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(registrationIntent);
             }
         });*/
-
-    // Handles the mail notification feature
-    public void onMailIconClick(View view) {
-        View redDot = findViewById(R.id.redDot);
-
-        if (redDot.getVisibility() == View.VISIBLE) {
-            // Red dot is visible, show the notification message
-            Toast.makeText(this, "You have a new notification!", Toast.LENGTH_SHORT).show();
-        } else {
-            // Red dot is not visible, show "No Notifications"
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setMessage("No Notifications").show();
-        }
-    }
 }
