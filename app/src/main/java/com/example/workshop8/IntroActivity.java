@@ -1,20 +1,20 @@
 package com.example.workshop8;
 
 import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.animation.ValueAnimator;
-import android.animation.AnimatorListenerAdapter;
 
 public class IntroActivity extends AppCompatActivity {
     private ViewPager viewPager;
     private Button continueButton;
-    //private ImageView arrowImageView;
+    private float initialX;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,46 +23,67 @@ public class IntroActivity extends AppCompatActivity {
 
         viewPager = findViewById(R.id.viewPager);
         continueButton = findViewById(R.id.btn_continue);
-        //arrowImageView = findViewById(R.id.btn_continue);
 
-        //Set an onClickListener to the continue button
         continueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Animate the arrow
                 animateArrow();
             }
         });
+
+        // Tracks user touch event
+       /* continueButton.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                float x = event.getX();
+
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        initialX = x;
+                        break;
+
+                    case MotionEvent.ACTION_MOVE:
+                        float finalX = x - initialX;
+
+                        float translationX = continueButton.getTranslationX() + finalX;
+                        if (translationX >= 0 && translationX <= 0.8f) {
+                            continueButton.setTranslationX(translationX);
+                        }
+
+                        initialX = x;
+                        break;
+
+                    case MotionEvent.ACTION_UP:
+                        // When drag is released, you can add any logic you need here.
+                        break;
+                }
+                return true;
+            }
+        });*/
     }
 
     private void animateArrow() {
-        // Create a ValueAnimator to move the arrow from the start to the end
-        ValueAnimator animator = ValueAnimator.ofFloat(0f, 1f);
-        animator.setDuration(1000); // Animation duration in milliseconds
+        ValueAnimator animator = ValueAnimator.ofFloat(continueButton.getTranslationX(), 0.8f);
+        animator.setDuration(1000);
 
-        // Update the arrow's position as the animation progresses
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
                 float progress = (float) animation.getAnimatedValue();
-                // Adjust the final position as needed
-                float finalPosition = 0.8f; // 0.8 is an example, adjust it accordingly
-                //arrowImageView.setTranslationX(progress * finalPosition);
+                continueButton.setTranslationX(progress);
             }
         });
 
-        // Start the animation
-        animator.start();
-
-        // Launch the next activity when the animation completes
         animator.addListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
                 super.onAnimationEnd(animation);
                 Intent intent = new Intent(IntroActivity.this, MainActivity.class);
                 startActivity(intent);
-                finish(); // Finish the IntroActivity to prevent going back
+                finish();
             }
         });
+
+        animator.start();
     }
 }

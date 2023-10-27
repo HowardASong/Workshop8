@@ -75,16 +75,19 @@
                     android:layout_height="28dp"
                     android:background="@drawable/arrow"
                     app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.096"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:layout_editor_absoluteX="41dp" />
+                    app:layout_constraintVertical_bias="0.55" />
 
                 <androidx.viewpager.widget.ViewPager
                     android:id="@+id/viewPager"
                     android:layout_width="330dp"
                     android:layout_height="1dp"
-                    app:layout_constraintEnd_toEndOf="@+id/btn_continue"
-                    app:layout_constraintHorizontal_bias="0.03"
-                    app:layout_constraintStart_toStartOf="@+id/textView16"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.302"
+                    app:layout_constraintStart_toEndOf="@+id/btn_continue"
                     tools:layout_editor_absoluteY="24dp" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>

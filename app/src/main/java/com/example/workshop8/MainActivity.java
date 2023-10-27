@@ -9,7 +9,6 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.EditText;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import android.view.MenuItem;
@@ -26,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         // Controls the keyboard
         final InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 
-        EditText editPersonName = findViewById(R.id.editPersonName);
+        EditText editPersonName = findViewById(R.id.editSearchBar);
 
         // Hide the keyboard initially
         inputMethodManager.hideSoftInputFromWindow(editPersonName.getWindowToken(), 0);

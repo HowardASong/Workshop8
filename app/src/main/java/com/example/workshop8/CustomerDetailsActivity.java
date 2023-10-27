@@ -103,7 +103,7 @@ public class CustomerDetailsActivity extends AppCompatActivity {
                 int customerId = Integer.parseInt(etCustomerId.getText().toString());
 
                 // URL of API
-                String deleteUrl = " " + customerId;
+                String deleteUrl = "http://10.0.2.2:8080/Workshop7-1.0-SNAPSHOT/api/customers/deletecustomer/{customerId}" + customerId;
 
                 StringRequest deleteRequest = new StringRequest(Request.Method.DELETE, deleteUrl,
                         new Response.Listener<String>() {
