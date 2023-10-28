@@ -464,8 +464,8 @@
     <!-- Bottom App Bar -->
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bot_navappbar"
-        android:layout_width="395dp"
-        android:layout_height="116dp"
+        android:layout_width="369dp"
+        android:layout_height="93dp"
         android:gravity="bottom"
         app:fabCradleMargin="10dp"
         app:fabCradleRoundedCornerRadius="10dp"
