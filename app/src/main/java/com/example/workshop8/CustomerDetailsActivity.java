@@ -57,6 +57,8 @@ public class CustomerDetailsActivity extends AppCompatActivity {
         etCustBusPhone = findViewById(R.id.etCustBusPhone);
         etCustEmail = findViewById(R.id.etCustEmail);
         etAgentId = findViewById(R.id.etAgentId);
+        etCustomerId.setFocusable(false);
+        etCustomerId.setFocusableInTouchMode(false);
 
         requestQueue = Volley.newRequestQueue(this);
 
