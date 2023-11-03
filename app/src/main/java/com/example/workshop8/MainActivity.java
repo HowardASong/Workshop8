@@ -1,3 +1,4 @@
+// Author: Nancy Chau
 package com.example.workshop8;
 
 import androidx.appcompat.app.AlertDialog;

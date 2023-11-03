@@ -136,6 +136,7 @@ public class CustomerDetailsActivity extends AppCompatActivity {
         queue.add(request);
     }
 
+    // Author: Nancy Chau
     // Deleting a customer
     private void deleteCustomer() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -175,6 +176,7 @@ public class CustomerDetailsActivity extends AppCompatActivity {
             }
         });
 
+        // Author: Nancy Chau
         builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
