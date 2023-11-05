@@ -64,7 +64,7 @@ public class BookingFormActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booking_form);
 
-        Log.d("Me", "In BookingFormActivity");
+        Log.d("Checkpoint", "In BookingFormActivity");
 
         spCustomers = findViewById(R.id.spCustomers);
         etTravelerCount = findViewById(R.id.etTravelerCount);
@@ -76,6 +76,7 @@ public class BookingFormActivity extends AppCompatActivity {
         btnSubmit = findViewById(R.id.btnSubmit);
         btnClear = findViewById(R.id.btnClear);
 
+        // Load all necessary dropdown menu items
         loadCustomers();
         loadPackages();
         loadTripTypes();
@@ -125,6 +126,7 @@ public class BookingFormActivity extends AppCompatActivity {
             }
         });
 
+        // Handling booking submission
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -132,6 +134,7 @@ public class BookingFormActivity extends AppCompatActivity {
                 if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
                     currentDate = LocalDateTime.now().toString();
                 }
+                // get all input
                 Customer selectedCustomer = (Customer) spCustomers.getSelectedItem();
                 int travelerCount = Integer.parseInt(etTravelerCount.getText().toString());
                 Packages selectedPackage = (Packages) spPackages.getSelectedItem();
@@ -143,6 +146,7 @@ public class BookingFormActivity extends AppCompatActivity {
                 Classes selectedClass = (Classes) spClass.getSelectedItem();
                 String regionId;
 
+                // JSON String for Bookings object
                 String bookingJson = "{" +
                         "'bookingDate': '" + currentDate + "Z" + "', " +
                         "'bookingNo': '" + generateRandomString() + "', " +
@@ -151,6 +155,7 @@ public class BookingFormActivity extends AppCompatActivity {
                         "'tripTypeId': '" + selectedTripType.getTripTypeId() + "'" +
                         "}";
                 try {
+                    // convert the string to JSON
                     JSONObject bookingObject = new JSONObject(bookingJson);
                     Log.d("Booking JSON", bookingJson);
                     Log.d("Booking Json", bookingObject.toString());
@@ -160,6 +165,7 @@ public class BookingFormActivity extends AppCompatActivity {
                     Log.e("Booking JSON", "Invalid Json string");
                 }
 
+                // Assign region based on package selection
                 if (selectedPackage.getPackageId() == 1) {
                     regionId = "SA";
                 }
@@ -175,6 +181,8 @@ public class BookingFormActivity extends AppCompatActivity {
 
                 try {
                     Thread.sleep(2000);
+                    // For one booking with n travelers, n number of booking details are created
+                    // so we need to loop through creating booking details for each traveler
                     for (int i=0; i<travelerCount; i++) {
                         getLastBooking(tripStart, tripEnd, selectedPackage, regionId, selectedClass);
                         Toast.makeText(getApplicationContext(),"Booking created successfully!",Toast.LENGTH_SHORT).show();
@@ -396,6 +404,10 @@ public class BookingFormActivity extends AppCompatActivity {
         queue.add(jsonArrayRequest);
     }
 
+    // This function passes the latest created bookings to booking details JSON builder so
+    // that the booking details are associated with the proper booking id
+    // We call postBookingDetails here to ensure that we're creating the current booking first,
+    // then fetching it to create its booking details.
     private void getLastBooking(String tripStart, String tripEnd, Packages selectedPackage,
                                 String regionId, Classes selectedClass) throws JSONException {
         String url = "http://10.0.2.2:8080/Workshop7-1.0-SNAPSHOT/api/booking/getlastbooking";
