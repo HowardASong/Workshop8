@@ -48,9 +48,11 @@ public class BookingActivity extends AppCompatActivity {
 
         //get customers
         Executors.newSingleThreadExecutor().execute(new GetAllCustomers());
+        //button to create a new booking
         btnCreate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //intent for booking form activity
                 Intent intent = new Intent(BookingActivity.this, BookingFormActivity.class);
                 startActivity(intent);
             }
@@ -59,12 +61,15 @@ public class BookingActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        //on resume will refresh the listview if the selection is not position 0
         if (spinCustomer.getSelectedItemPosition() > 0) {
+            //get the customer id from the selected position
             int customerId = getSelectedCustomerId(spinCustomer.getSelectedItemPosition());
+            //call for the getselectedbooking method with customerid
             Executors.newSingleThreadExecutor().execute(new GetSelectedBooking(customerId));
         }
     }
-
+    //get all customers method
     class GetAllCustomers implements Runnable {
         @Override
         public void run() {
@@ -122,7 +127,7 @@ public class BookingActivity extends AppCompatActivity {
                                                 if (position > 0) {
                                                     // Position 0 is "Select a customer"
                                                     int customerId = getSelectedCustomerId(position);
-                                                    Log.d("TEST", String.valueOf(customerId));
+                                                    // updates listview with the customerid
                                                     Executors.newSingleThreadExecutor().execute(new GetSelectedBooking(customerId));
                                                 } else { // Clear the ListView when "Select a customer" is selected
                                                     lvBook.setAdapter(null);
@@ -157,7 +162,7 @@ public class BookingActivity extends AppCompatActivity {
             requestQueue.add(stringRequest);
         }
     }
-
+    //method to get selected custoemr from the position on the spinner
     private int getSelectedCustomerId(int selectedPosition) {
         if (selectedPosition > 0) {
             Customer selectedCustomer = customersList.get(selectedPosition - 1);
@@ -165,7 +170,7 @@ public class BookingActivity extends AppCompatActivity {
         }
         return -1;
     }
-
+    //method to get the selectedbooking with the customer id and update the listview
     class GetSelectedBooking implements Runnable {
         private int customerId;
 
@@ -189,14 +194,15 @@ public class BookingActivity extends AppCompatActivity {
                                 bookingsList.add(bookingItem);
                             }
                             BookingsAdapter adapter = new BookingsAdapter(BookingActivity.this, bookingsList);
-                            lvBook.setAdapter(adapter);
+                            lvBook.setAdapter(adapter); //set listview as the adapter
+                            //listview listener
                             lvBook.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                 @Override
                                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                                     if (position >= 0 && position < bookingsList.size()) {
                                         Bookings selectedBooking = bookingsList.get(position);
                                         int bookingId = selectedBooking.getBookingId();
-
+                                        //starts the booking details activity
                                         Intent intent = new Intent(BookingActivity.this, BookingDetailsActivity.class);
                                         intent.putExtra(BookingDetailsActivity.EXTRA_BOOKING_ID, bookingId);
                                         startActivity(intent);

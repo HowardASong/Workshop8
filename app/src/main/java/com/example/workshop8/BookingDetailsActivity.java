@@ -30,10 +30,10 @@
         Button btnDeleteBooking;
         EditText etBookingDetailId, etStartDate, etEndDate, etDescription, etDestination, etPrice, etBookingId, etRegion, etFee, etClass;
 
+        //method to extract date with a format
         private String extractDatePart(String dateWithTime) {
             // Define a regex pattern to match the date format "MMM dd, yyyy"
             Pattern pattern = Pattern.compile("([A-Za-z]{3} \\d{1,2}, \\d{4})");
-
             // Create a Matcher object and match it against the dateWithTime string
             Matcher matcher = pattern.matcher(dateWithTime);
 
@@ -85,7 +85,9 @@
             etPrice.setFocusableInTouchMode(false);
 
             btnDeleteBooking.setVisibility(View.INVISIBLE);
+            //if bookingId returns an id and not -1 (none)
             if (bookingId != -1) {
+                //api url
                 String url = "http://10.0.2.2:8080/Workshop7-1.0-SNAPSHOT/api/booking/getbookingdetail/" + bookingId;
 
                 RequestQueue requestQueue = Volley.newRequestQueue(this);
@@ -94,10 +96,10 @@
                     public void onResponse(String response) {
                         if (response != null && !response.isEmpty()) {
                             try {
-                                JSONArray bookingDetailsArray = new JSONArray(response);
-                                if (bookingDetailsArray.length() > 0) {
-                                    JSONObject bookingDetailsJson = bookingDetailsArray.getJSONObject(0);
-
+                                JSONArray bookingDetailsArray = new JSONArray(response); //new JSON OBJECT
+                                if (bookingDetailsArray.length() > 0) { //if object returns some data
+                                    JSONObject bookingDetailsJson = bookingDetailsArray.getJSONObject(0); //select first object in the array
+                                    //define the variables with data
                                     int bookingDetailId = bookingDetailsJson.getInt("bookingDetailId");
                                     String startDate = bookingDetailsJson.optString("tripStart", "No data available");
                                     String endDate = bookingDetailsJson.optString("tripEnd", "No data available");
@@ -108,7 +110,7 @@
                                     String fee = bookingDetailsJson.optString("feeId", "No data available");
                                     String travelClass = bookingDetailsJson.optString("classId", "No data available");
                                     int bookingId = bookingDetailsJson.optInt("bookingId", 0);
-
+                                    //extract the date with the pattern match
                                     startDate = extractDatePart(startDate);
                                     endDate = extractDatePart(endDate);
 
@@ -122,7 +124,7 @@
                                     etFee.setText(fee);
                                     etClass.setText(travelClass);
                                     etBookingId.setText(String.valueOf(bookingId));
-                                } else {
+                                } else { //if no data was returned then fill every slot with not available
                                     etBookingDetailId.setText("Not Available");
                                     etStartDate.setText("Not Available");
                                     etEndDate.setText("Not Available");
@@ -136,6 +138,7 @@
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
+                            //delete booking button visible
                             btnDeleteBooking.setVisibility(View.VISIBLE);
                         } else {
                             etStartDate.setText("No data available");
@@ -148,36 +151,42 @@
                     }
                 });
                 requestQueue.add(stringRequest);
+                //delete button listener
                 btnDeleteBooking.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        //call for the delete method with the bookingId
                         deleteBooking(bookingId);
                     }
                 });
 
             } else {
+                Log.d("ERROR", "No booking Id");
             }
         }
         private void deleteBooking(int bookingId) {
+            //api url
             String deleteUrl = "http://10.0.2.2:8080/Workshop7-1.0-SNAPSHOT/api/booking/deletebooking/" + bookingId;
 
             StringRequest deleteRequest = new StringRequest(Request.Method.DELETE, deleteUrl,
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
+                            //toast pop up when successful
                             Toast.makeText(BookingDetailsActivity.this, "Booking deleted successfully", Toast.LENGTH_SHORT).show();
-                            setResult(RESULT_OK);
-                            finish();
+                            setResult(RESULT_OK); //set result to OK
+                            finish();//close the activity
                         }
                     },
                     new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
                             VolleyLog.wtf(error.getMessage(), "utf-8");
+                            //toast popup when failed
                             Toast.makeText(BookingDetailsActivity.this, "Failed to delete booking", Toast.LENGTH_SHORT).show();
                         }
                     });
             RequestQueue requestQueue = Volley.newRequestQueue(this);
-            requestQueue.add(deleteRequest);
+            requestQueue.add(deleteRequest); //return
         }
     }
